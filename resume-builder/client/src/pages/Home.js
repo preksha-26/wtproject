@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -19,32 +20,38 @@ const Home = () => {
         <p style={{ fontSize: '1.2rem', marginBottom: '2rem', maxWidth: '600px' }}>
           Build your perfect resume with our easy-to-use builder. Download in PDF format.
         </p>
-        <button style={{ 
-          background: 'white',
-          color: '#4361ee',
-          padding: '1rem 2rem',
-          border: 'none',
-          borderRadius: '50px',
-          fontSize: '1.1rem',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          margin: '0 0.5rem'
-        }}>
-          Create Resume
-        </button>
-        <button style={{ 
-          background: 'transparent',
-          color: 'white',
-          padding: '1rem 2rem',
-          border: '2px solid white',
-          borderRadius: '50px',
-          fontSize: '1.1rem',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          margin: '0 0.5rem'
-        }}>
-          View Templates
-        </button>
+        <div>
+          <Link to="/builder">
+            <button style={{ 
+              background: 'white',
+              color: '#4361ee',
+              padding: '1rem 2rem',
+              border: 'none',
+              borderRadius: '50px',
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              margin: '0 0.5rem'
+            }}>
+              Create Resume
+            </button>
+          </Link>
+          <Link to="/templates">
+            <button style={{ 
+              background: 'transparent',
+              color: 'white',
+              padding: '1rem 2rem',
+              border: '2px solid white',
+              borderRadius: '50px',
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              margin: '0 0.5rem'
+            }}>
+              View Templates
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
