@@ -1,46 +1,84 @@
 const express = require('express');
+const Resume = require('../models/Resume');
+
 const router = express.Router();
 
-// Test route
-router.get('/test', (req, res) => {
-  res.json({ message: 'Resumes route is working!' });
+// Get all resumes for user
+router.get('/', async (req, res) => {
+  try {
+    // For now, return all resumes (later we'll filter by user)
+    const resumes = await Resume.find().sort({ createdAt: -1 });
+    res.json(resumes);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
 });
 
-// Get all resumes
-router.get('/', (req, res) => {
-  res.json({ 
-    message: 'Get all resumes',
-    resumes: [] 
-  });
+// Get single resume
+router.get('/:id', async (req, res) => {
+  try {
+    const resume = await Resume.findById(req.params.id);
+    
+    if (!resume) {
+      return res.status(404).json({ message: 'Resume not found' });
+    }
+    
+    res.json(resume);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
 });
 
 // Create new resume
-router.post('/', (req, res) => {
-  const resumeData = req.body;
-  
-  res.status(201).json({
-    message: 'Resume created successfully',
-    resume: {
-      id: Date.now(),
-      ...resumeData,
-      createdAt: new Date().toISOString()
-    }
-  });
+router.post('/', async (req, res) => {
+  try {
+    const resumeData = {
+      ...req.body,
+      // userId would come from authenticated user in real app
+      userId: 'demo-user-id'
+    };
+    
+    const resume = new Resume(resumeData);
+    await resume.save();
+    
+    res.status(201).json(resume);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
 });
 
 // Update resume
-router.put('/:id', (req, res) => {
-  const { id } = req.params;
-  const resumeData = req.body;
-  
-  res.json({
-    message: 'Resume updated successfully',
-    resume: {
-      id,
-      ...resumeData,
-      updatedAt: new Date().toISOString()
+router.put('/:id', async (req, res) => {
+  try {
+    const resume = await Resume.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    
+    if (!resume) {
+      return res.status(404).json({ message: 'Resume not found' });
     }
-  });
+    
+    res.json(resume);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Delete resume
+router.delete('/:id', async (req, res) => {
+  try {
+    const resume = await Resume.findByIdAndDelete(req.params.id);
+    
+    if (!resume) {
+      return res.status(404).json({ message: 'Resume not found' });
+    }
+    
+    res.json({ message: 'Resume deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
 });
 
 module.exports = router;
