@@ -1,117 +1,101 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const MyResumesContainer = styled.div`
-  padding: 2rem 0;
-  min-height: 100vh;
-`;
-
-const ResumesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-`;
-
-const ResumeCard = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: ${props => props.theme.shadows.medium};
-  border-left: 4px solid ${props => props.theme.colors.primary};
-`;
-
-const ResumeTitle = styled.h3`
-  color: ${props => props.theme.colors.dark};
-  margin-bottom: 0.5rem;
-`;
-
-const ResumeDate = styled.p`
-  color: ${props => props.theme.colors.gray};
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-
-  &.primary {
-    background: ${props => props.theme.colors.primary};
-    color: white;
-
-    &:hover {
-      background: ${props => props.theme.colors.secondary};
-    }
-  }
-
-  &.secondary {
-    background: transparent;
-    color: ${props => props.theme.colors.primary};
-    border: 1px solid ${props => props.theme.colors.primary};
-
-    &:hover {
-      background: ${props => props.theme.colors.primary};
-      color: white;
-    }
-  }
-`;
-
-const EmptyState = styled.div`
-  text-align: center;
-  padding: 4rem 2rem;
-  color: ${props => props.theme.colors.gray};
-
-  h3 {
-    margin-bottom: 1rem;
-    color: ${props => props.theme.colors.dark};
-  }
-`;
+import { Link } from 'react-router-dom';
 
 const MyResumes = () => {
   // For demo purposes - in real app, this would come from backend
   const resumes = [];
 
   return (
-    <MyResumesContainer className="container">
-      <h1 style={{color: '#4361ee', marginBottom: '2rem'}}>My Resumes</h1>
+    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', minHeight: '100vh' }}>
+      <h1 style={{ color: '#4361ee', marginBottom: '2rem' }}>My Resumes</h1>
       
       {resumes.length > 0 ? (
-        <ResumesGrid>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '2rem' 
+        }}>
           {resumes.map(resume => (
-            <ResumeCard key={resume.id}>
-              <ResumeTitle>{resume.title}</ResumeTitle>
-              <ResumeDate>Last modified: {resume.lastModified}</ResumeDate>
-              <ButtonGroup>
-                <Button className="primary">Edit</Button>
-                <Button className="secondary">Download</Button>
-                <Button className="secondary">Delete</Button>
-              </ButtonGroup>
-            </ResumeCard>
+            <div key={resume.id} style={{ 
+              background: 'white', 
+              borderRadius: '10px', 
+              padding: '1.5rem', 
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+              borderLeft: '4px solid #4361ee'
+            }}>
+              <h3 style={{ color: '#333', marginBottom: '0.5rem' }}>{resume.title}</h3>
+              <p style={{ color: '#6c757d', fontSize: '0.9rem', marginBottom: '1rem' }}>
+                Last modified: {resume.lastModified}
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <Link to={`/builder?resumeId=${resume.id}`}>
+                  <button style={{ 
+                    background: '#4361ee', 
+                    color: 'white', 
+                    padding: '0.5rem 1rem', 
+                    border: 'none', 
+                    borderRadius: '5px',
+                    fontWeight: '600',
+                    fontSize: '0.9rem',
+                    cursor: 'pointer'
+                  }}>
+                    Edit
+                  </button>
+                </Link>
+                <button style={{ 
+                  background: 'transparent', 
+                  color: '#4361ee', 
+                  padding: '0.5rem 1rem', 
+                  border: '1px solid #4361ee', 
+                  borderRadius: '5px',
+                  fontWeight: '600',
+                  fontSize: '0.9rem',
+                  cursor: 'pointer'
+                }}>
+                  Download
+                </button>
+                <button style={{ 
+                  background: 'transparent', 
+                  color: '#dc3545', 
+                  padding: '0.5rem 1rem', 
+                  border: '1px solid #dc3545', 
+                  borderRadius: '5px',
+                  fontWeight: '600',
+                  fontSize: '0.9rem',
+                  cursor: 'pointer'
+                }}>
+                  Delete
+                </button>
+              </div>
+            </div>
           ))}
-        </ResumesGrid>
+        </div>
       ) : (
-        <EmptyState>
-          <h3>No resumes yet</h3>
+        <div style={{ 
+          textAlign: 'center', 
+          padding: '4rem 2rem', 
+          color: '#6c757d' 
+        }}>
+          <h3 style={{ marginBottom: '1rem', color: '#333' }}>No resumes yet</h3>
           <p>Create your first resume to get started!</p>
-          <Button 
-            className="primary" 
-            style={{marginTop: '1rem', padding: '0.75rem 1.5rem'}}
-            onClick={() => window.location.href = '/builder'}
-          >
-            Create Resume
-          </Button>
-        </EmptyState>
+          <Link to="/builder">
+            <button style={{ 
+              background: '#4361ee', 
+              color: 'white', 
+              padding: '0.75rem 1.5rem', 
+              border: 'none', 
+              borderRadius: '5px',
+              fontWeight: '600',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              marginTop: '1rem'
+            }}>
+              Create Resume
+            </button>
+          </Link>
+        </div>
       )}
-    </MyResumesContainer>
+    </div>
   );
 };
 

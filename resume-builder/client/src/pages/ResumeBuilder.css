@@ -1,0 +1,72 @@
+.builder-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.builder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.builder-header h1 {
+  color: #4361ee;
+  margin: 0 0 0.5rem 0;
+}
+
+.template-info {
+  background: #4361ee;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.builder-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  height: calc(100vh - 200px);
+}
+
+.form-section {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow-y: auto;
+}
+
+.preview-section {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow-y: auto;
+}
+
+.download-section {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+@media (max-width: 968px) {
+  .builder-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  
+  .builder-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}

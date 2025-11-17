@@ -1,0 +1,115 @@
+.preview-container {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  min-height: 800px;
+  background: white;
+  padding: 2rem;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.preview-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.template-badge {
+  background: #4361ee;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.preview-content {
+  font-family: Arial, sans-serif;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.resume-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.resume-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+  color: #2c3e50;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.section-content {
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.item-title {
+  font-weight: bold;
+  margin: 0;
+  color: #2c3e50;
+}
+
+.item-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.item-subtitle {
+  margin: 0.25rem 0;
+  color: #555;
+  font-weight: 500;
+}
+
+.item-description {
+  line-height: 1.6;
+  margin: 0;
+  color: #444;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.skill-tag {
+  background: #ecf0f1;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  color: #2c3e50;
+}
